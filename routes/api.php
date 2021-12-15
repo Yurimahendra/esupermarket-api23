@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResources([
     'datapenjual' => 'Api\DataPenjualController',
+    
     'dataproduk' => 'Api\DataProdukController',
     'datakurir' => 'Api\DataKurirController',
     'datapembeli' => 'Api\DataPembeliController',

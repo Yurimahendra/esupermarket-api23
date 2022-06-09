@@ -17,7 +17,8 @@ class DataKurirController extends Controller
      */
     public function index()
     {
-        return DataKurirResource::collection(DataKurir::all());
+        $GetdataPenjual = DataKurirResource::collection(DataKurir::all());
+        return $GetdataPenjual;
     }
 
     /**
@@ -36,14 +37,25 @@ class DataKurirController extends Controller
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'no_ponsel' => 'required',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
            
         ]);
 
+
         $gambar = $request->file('gambar');
+        $filename = null;
+        if($gambar){
+            $filename = date('YmdHis').".".$gambar->getClientOriginalName();
+            $filename = $filename;
+            $path = $gambar->storeAs('public/gambar', $filename);
+        }else{
+            $filename = null;
+        }
+
+       /***  $gambar = $request->file('gambar');
         $filename = $gambar->getClientOriginalName();
         $filename = $filename;
-        $path = $gambar->storeAs('public/gambar', $filename);
+        $path = $gambar->storeAs('public/gambar', $filename);*/
 
        
 
@@ -59,7 +71,12 @@ class DataKurirController extends Controller
     
         ]);
 
-        return new DataKurirResource($dataKurir);
+        /*return response([
+            'kode' => 200,
+            'message' => 'data berhasil dibuat',
+            'data' => $dataKurir
+        ]);*/
+        return $dataKurir;
     }
 
     /**
@@ -70,7 +87,8 @@ class DataKurirController extends Controller
      */
     public function show($dataKurir)
     {
-        return new DataKurirResource(DataKurir::find($dataKurir));
+        $showDataKurir = new DataKurirResource(DataKurir::find($dataKurir));
+        return $showDataKurir;
     }
 
     /**
@@ -90,7 +108,7 @@ class DataKurirController extends Controller
             'tempat_lahir' => '',
             'tanggal_lahir' => '',
             'no_ponsel' => '',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
            
         ]);
 
@@ -124,10 +142,12 @@ class DataKurirController extends Controller
         $apdetDataKurir->update();
        
 
-        return response([
+        /*return response([
+            'kode' => 200,
             'message' => 'data berhasil diupdate',
             'data' => $apdetDataKurir
-        ], 200);
+        ]);*/
+        return $apdetDataKurir;
     }
 
     /**
@@ -143,9 +163,6 @@ class DataKurirController extends Controller
             Storage::delete('public/gambar/'.$hapusDataKurir->gambar);
         }
         $hapusDataKurir->delete();
-        return response([
-            'message' => 'berhasil dihapus',
-            'data' => $hapusDataKurir
-        ], 200);
+        return $hapusDataKurir;
     }
 }

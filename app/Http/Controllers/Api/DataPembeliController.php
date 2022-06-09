@@ -17,7 +17,8 @@ class DataPembeliController extends Controller
      */
     public function index()
     {
-        return DataPembeliResource::collection(DataPembeli::all());
+        $getDataPembeli = DataPembeliResource::collection(DataPembeli::all());
+        return $getDataPembeli;
     }
 
     /**
@@ -29,23 +30,26 @@ class DataPembeliController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nik' => 'required',
+            'nik' => 'required|integer',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
             'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
+            'tanggal_lahir' => 'required|date',
             'no_ponsel' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
            
         ]);
 
-
         $gambar = $request->file('gambar');
-        $filename = $gambar->getClientOriginalName();
-        $filename = $filename;
-        $path = $gambar->storeAs('public/gambar', $filename);
-
+        $filename = null;
+        if($gambar){
+            $filename = date('YmdHis').".".$gambar->getClientOriginalName();
+            $filename = $filename;
+            $path = $gambar->storeAs('public/gambar', $filename);
+        }else{
+            $filename = null;
+        }
        
 
         $dataPembeli = DataPembeli::create([
@@ -59,7 +63,13 @@ class DataPembeliController extends Controller
             'gambar' => $filename
         ]);
 
-        return new DataPembeliResource($dataPembeli);
+        //return new DataPembeliResource($dataPembeli);
+        /*return response([
+            'kode' => 200,
+            'pesan' => 'data tersedia',
+            'data' => $dataPembeli
+        ]);*/
+        return $dataPembeli;
     }
 
     /**
@@ -70,7 +80,8 @@ class DataPembeliController extends Controller
      */
     public function show($dataPembeli)
     {
-        return new DataPembeliResource(DataPembeli::find($dataPembeli));
+        $showDataPembeli = new DataPembeliResource(DataPembeli::find($dataPembeli));
+        return  $showDataPembeli;
     }
 
     /**
@@ -83,14 +94,14 @@ class DataPembeliController extends Controller
     public function update(Request $request, $dataPembeli)
     {
         $request->validate([
-            'nik' => 'required',
+            'nik' => 'required|integer',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
             'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
+            'tanggal_lahir' => 'required|date',
             'no_ponsel' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
            
         ]);
 
@@ -103,13 +114,11 @@ class DataPembeliController extends Controller
             # code...
             
             Storage::delete('public/gambar/'.$apdetDataPembeli->gambar);
-            $gambar = $request->file('gambar')->getClientOriginalName();
+            $gambar = date('YmdHis').".".$request->file('gambar')->getClientOriginalName();
             $foto = $request->file('gambar')->storeAs('public/gambar', $gambar);
             $apdetDataPembeli->gambar = $gambar;
             
-        }
-
-        if($foto == null){
+        }else{
              $apdetDataPembeli->gambar;
         }
 
@@ -122,10 +131,12 @@ class DataPembeliController extends Controller
         $apdetDataPembeli->no_ponsel     = $request->no_ponsel;
         $apdetDataPembeli->update();
 
-        return response([
+        /*return response([
+            'kode' => 200,
             'message' => 'data berhasil diupdate',
             'data' => $apdetDataPembeli
-        ], 200);
+        ]);*/
+        return $apdetDataPembeli;
     }
 
     /**
@@ -141,9 +152,6 @@ class DataPembeliController extends Controller
             Storage::delete('public/gambar/'.$hapusDataPembeli->gambar);
         }
         $hapusDataPembeli->delete();
-        return response([
-            'message' => 'berhasil dihapus',
-            'data' => $hapusDataPembeli
-        ], 200);
+        return $hapusDataPembeli;
     }
 }

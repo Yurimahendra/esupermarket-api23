@@ -20,7 +20,7 @@ class CreateDataKurirTable extends Migration
             $table->string('jenis_kelamin');
             $table->string('alamat');
             $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
+            $table->string('tanggal_lahir');
             $table->string('no_ponsel')->unique();
             $table->string('gambar')->nullable();
             $table->timestamps();

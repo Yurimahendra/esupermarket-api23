@@ -21,9 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResources([
     'datapenjual' => 'Api\DataPenjualController',
-    
     'dataproduk' => 'Api\DataProdukController',
     'datakurir' => 'Api\DataKurirController',
     'datapembeli' => 'Api\DataPembeliController',
-    'dataorderan' => 'Api\DataOrderanController'
+    'dataorderan' => 'Api\DataOrderanController',
+    'datakeranjang' => 'Api\DataKeranjangController'
 ]);
+
+//Route::get('/api/dataproduk', [Api\DataProdukController::class, 'index']);
+
+//Route::post('api/dataproduk/{dataproduk}', [Api\DataProdukController::class, 'destroy']);

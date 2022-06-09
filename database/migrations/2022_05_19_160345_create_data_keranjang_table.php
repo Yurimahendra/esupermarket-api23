@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataPembeliTable extends Migration
+class CreateDataKeranjangTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateDataPembeliTable extends Migration
      */
     public function up()
     {
-        Schema::create('data_pembeli', function (Blueprint $table) {
+        Schema::create('data_keranjang', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('nik')->unique();
-            $table->string('nama');
-            $table->string('jenis_kelamin');
-            $table->string('alamat');
-            $table->string('tempat_lahir');
-            $table->string('tanggal_lahir');
-            $table->string('no_ponsel')->unique();
+            $table->string('nama_barang');
+            $table->string('merk');
+            $table->string('harga');
+            $table->char('satuan');
+            $table->bigInteger('min_belanja');
+            $table->string('ongkir');
             $table->string('gambar')->nullable();
+            $table->string('deskripsi')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ class CreateDataPembeliTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('data_pembeli');
+        Schema::dropIfExists('data_keranjang');
     }
 }

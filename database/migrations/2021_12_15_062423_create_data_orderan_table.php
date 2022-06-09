@@ -15,16 +15,23 @@ class CreateDataOrderanTable extends Migration
     {
         Schema::create('data_orderan', function (Blueprint $table) {
             $table->id();
-            $table->string('order_id')->unique();
+            $table->string('id_pesanan')->unique();
             $table->string('nama');
             $table->string('no_hp');
             $table->string('alamat');
             $table->string('nama_barang');
+            $table->string('merk_barang');
+            $table->string('harga_barang');
             $table->bigInteger('jumlah_pesanan');
-            $table->bigInteger('ongkir');
-            $table->bigInteger('total_harga');
+            $table->string('satuan');
+            $table->string('gambar')->nullable();
+            $table->string('tanggal_pengiriman');
+            $table->string('ongkir')->nullable();
+            $table->string('total_harga');
             $table->string('metode_pembayaran');
-            $table->string('status');
+            $table->string('status')->nullable();
+            $table->string('status_pesanan')->nullable();
+            $table->string('bukti_transfer')->nullable();
             $table->timestamps();
         });
     }

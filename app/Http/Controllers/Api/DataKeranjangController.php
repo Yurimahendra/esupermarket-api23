@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\DataProdukResource;
-use App\Models\DataProduk;
+use App\Http\Resources\DataKeranjangResource;
+use App\Models\DataKeranjang;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
-class DataProdukController extends Controller
+class DataKeranjangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,8 @@ class DataProdukController extends Controller
      */
     public function index()
     {
-        $getDataProduk = DataProdukResource::collection(DataProduk::all());
+        $getDataProduk = DataKeranjangResource::collection(DataKeranjang::all());
         return $getDataProduk;
-         
     }
 
     /**
@@ -37,32 +35,24 @@ class DataProdukController extends Controller
             'satuan' => 'required',
             'min_belanja' => 'required|integer',
             'ongkir' => 'required',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'gambar' => 'nullable',
             'deskripsi' => 'nullable'
         ]);
 
 
-        $gambar = $request->file('gambar');
-        $filename = null;
-        if ($gambar) {
-            $filename = date('YmdHis').".".$gambar->getClientOriginalName();
-            $filename = $filename;
-            $path = $gambar->storeAs('public/gambar', $filename);
-        }else{
-            $filename = null;
-        }
+    
         
 
        
 
-        $dataProduk = DataProduk::create([
+        $dataProduk = DataKeranjang::create([
             'nama_barang' => $request->nama_barang,
             'merk' => $request->merk,
             'harga' => $request->harga,
             'satuan' => $request->satuan,
             'min_belanja' => $request->min_belanja,
             'ongkir' => $request->ongkir,
-            'gambar' => $filename,
+            'gambar' => $request->gambar,
             'deskripsi' => $request->deskripsi
         ]);
 
@@ -72,30 +62,28 @@ class DataProdukController extends Controller
             'data' => new DataProdukResource($dataProduk)
         ]);*/
         return $dataProduk;
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\DataProduk  $dataProduk
+     * @param  \App\Models\DataKeranjang  $dataKeranjang
      * @return \Illuminate\Http\Response
      */
-    public function show($dataProduk)
+    public function show($dataKeranjang)
     {
-        $showProduk = new DataProdukResource(DataProduk::find($dataProduk));
+        $showProduk = new DataKeranjangResource(DataKeranjang::find($dataKeranjang));
         return  $showProduk;
-        
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DataProduk  $dataProduk
+     * @param  \App\Models\DataKeranjang  $dataKeranjang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $dataProduk)
+    public function update(Request $request, $dataKeranjang)
     {
         $request->validate([
             'nama_barang' => 'required',
@@ -104,34 +92,19 @@ class DataProdukController extends Controller
             'satuan' => 'required',
             'min_belanja' => 'required|integer',
             'ongkir' => 'required',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'gambar' => 'nullable',
             'deskripsi' => 'nullable'
         ]);
 
         
-        $apdet = DataProduk::find($dataProduk);
-        $foto = $request->file('gambar');
-        
-    
-//$foto == null || $foto == $apdet->gambar
-        if($foto){
-            Storage::delete('public/gambar/'.$apdet->gambar);
-            $gambar = date('YmdHis').".".$request->file('gambar')->getClientOriginalName();
-            $foto = $request->file('gambar')->storeAs('public/gambar', $gambar);
-            $apdet->gambar = $gambar;
-
-        }else{
-            # code...
-            $apdet->gambar;
-
-        }
-
+        $apdet = DataKeranjang::find($dataKeranjang);
         $apdet->nama_barang   = $request->nama_barang;
         $apdet->merk          = $request->merk;
         $apdet->harga         = $request->harga;
         $apdet->satuan        = $request->satuan;
         $apdet->min_belanja   = $request->min_belanja;
         $apdet->ongkir        = $request->ongkir;
+        $apdet->gambar        = $request->gambar;
         $apdet->deskripsi     = $request->deskripsi;
         
         $apdet->update();
@@ -147,16 +120,13 @@ class DataProdukController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\DataProduk  $dataProduk
+     * @param  \App\Models\DataKeranjang  $dataKeranjang
      * @return \Illuminate\Http\Response
      */
-    public function destroy($dataProduk)
+    public function destroy(DataKeranjang $dataKeranjang)
     {
-        $hapus = DataProduk::find($dataProduk);
-        if ($hapus->gambar) {
-            Storage::delete('public/gambar/'.$hapus->gambar);
-        }
-        $hapus->delete();
-        return $hapus;
+        $hapusDataproduk = DataKeranjang::find($dataKeranjang);
+        $hapusDataproduk->delete();
+        return $hapusDataproduk;
     }
 }

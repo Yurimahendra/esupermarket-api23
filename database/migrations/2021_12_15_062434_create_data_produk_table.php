@@ -17,9 +17,10 @@ class CreateDataProdukTable extends Migration
             $table->id();
             $table->string('nama_barang');
             $table->string('merk');
-            $table->bigInteger('harga');
+            $table->string('harga');
             $table->char('satuan');
-            $table->bigInteger('stok');
+            $table->bigInteger('min_belanja');
+            $table->string('ongkir');
             $table->string('gambar')->nullable();
             $table->string('deskripsi')->nullable();
             $table->timestamps();

@@ -9,6 +9,6 @@ class DataOrderan extends Model
 {
     use HasFactory;
     protected $table = 'data_orderan';
-    protected $fillable = ['order_id', 'nama', 'no_hp', 'alamat', 'nama_barang', 'jumlah_pesanan','ongkir'
-    , 'total_harga', 'metode_pembayaran', 'status'];
+    protected $fillable = ['id_pesanan', 'nama', 'no_hp', 'alamat', 'nama_barang', 'merk_barang', 'harga_barang', 'jumlah_pesanan', 'satuan', 'gambar', 'tanggal_pengiriman', 'ongkir'
+    , 'total_harga', 'metode_pembayaran', 'status', 'status_pesanan', 'bukti_transfer'];
 }

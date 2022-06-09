@@ -17,7 +17,11 @@ class DataPenjualController extends Controller
      */
     public function index()
     {
-        return DataPenjualResource::collection(DataPenjual::all());
+    
+
+        $GetdataPenjual = DataPenjualResource::collection(DataPenjual::all());
+        
+        return $GetdataPenjual;
     }
 
     /**
@@ -29,7 +33,7 @@ class DataPenjualController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nik' => 'required',
+            'nik' => 'required|integer',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
@@ -37,15 +41,22 @@ class DataPenjualController extends Controller
             'tanggal_lahir' => 'required',
             'no_ponsel' => 'required',
             'nama_toko' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'nama_bank' => 'required',
+            'no_rekening' => 'required|integer',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
            
         ]);
 
 
         $gambar = $request->file('gambar');
-        $filename = $gambar->getClientOriginalName();
-        $filename = $filename;
-        $path = $gambar->storeAs('public/gambar', $filename);
+        $filename = null;
+        if($gambar){
+            $filename = date('YmdHis').".".$gambar->getClientOriginalName();
+            $filename = $filename;
+            $path = $gambar->storeAs('public/gambar', $filename);
+        }else{
+            $filename = null;
+        }
 
        
 
@@ -58,10 +69,17 @@ class DataPenjualController extends Controller
             'tanggal_lahir' => $request->tanggal_lahir,
             'no_ponsel' => $request->no_ponsel,
             'nama_toko' => $request->nama_toko,
+            'nama_bank' => $request->nama_bank,
+            'no_rekening' => $request->no_rekening,
             'gambar' => $filename
         ]);
 
-        return new DataPenjualResource($dataPenjual);
+        /*return response([
+            'kode' => 200,
+            'pesan' => 'data tersedia',
+            'data' => $dataPenjual
+        ]);*/
+        return $dataPenjual;
     }
 
     /**
@@ -72,7 +90,8 @@ class DataPenjualController extends Controller
      */
     public function show($dataPenjual)
     {
-        return new DataPenjualResource(DataPenjual::find($dataPenjual));
+        $showDataPenjual = new DataPenjualResource(DataPenjual::find($dataPenjual));
+        return  $showDataPenjual;
     }
 
     /**
@@ -85,7 +104,7 @@ class DataPenjualController extends Controller
     public function update(Request $request, $dataPenjual)
     {
         $request->validate([
-            'nik' => 'required',
+            'nik' => 'required|integer',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
@@ -93,7 +112,9 @@ class DataPenjualController extends Controller
             'tanggal_lahir' => 'required',
             'no_ponsel' => 'required',
             'nama_toko' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'nama_bank' => 'required',
+            'no_rekening' => 'required|integer',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
 
 
@@ -124,12 +145,15 @@ class DataPenjualController extends Controller
         $apdetDataPenjual->tanggal_lahir = $request->tanggal_lahir;
         $apdetDataPenjual->no_ponsel     = $request->no_ponsel;
         $apdetDataPenjual->nama_toko     = $request->nama_toko;
+        $apdetDataPenjual->nama_bank     = $request->nama_bank;
+        $apdetDataPenjual->no_rekening   = $request->no_rekening;
         $apdetDataPenjual->update();
 
-        return response([
+       /* return response([
             'message' => 'data berhasil diupdate',
             'data' => $apdetDataPenjual
-        ], 200);
+        ], 200);*/
+        return $apdetDataPenjual;
     }
 
     /**
@@ -145,9 +169,6 @@ class DataPenjualController extends Controller
             Storage::delete('public/gambar/'.$hapusDataPenjual->gambar);
         }
         $hapusDataPenjual->delete();
-        return response([
-            'message' => 'berhasil dihapus',
-            'data' => $hapusDataPenjual
-        ], 200);
+        return $hapusDataPenjual;
     }
 }

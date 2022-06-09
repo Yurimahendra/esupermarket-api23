@@ -33,7 +33,7 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [ "ln -sr storage/app/public/storage/ public/storage/gambar/" ],
+        "post-install-cmd": [ "ln -sr storage/app/public/storage public/storage/gambar" ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

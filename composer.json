@@ -32,7 +32,7 @@
             "Tests\\": "tests/"
         }
     },
-    "post-install-cmd": [ "ln -sr storage/app/public/storage public/storage/gambar" ],
+    "post-install-cmd": [ "ln -sr storage/app/public/storage/ public/storage/gambar/" ],
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

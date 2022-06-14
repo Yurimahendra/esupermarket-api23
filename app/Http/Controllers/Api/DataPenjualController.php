@@ -37,6 +37,8 @@ class DataPenjualController extends Controller
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
+            'latitude' => '',
+            'longitude' => '',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'no_ponsel' => 'required',
@@ -65,6 +67,8 @@ class DataPenjualController extends Controller
             'nama' => $request->nama,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'no_ponsel' => $request->no_ponsel,
@@ -108,6 +112,8 @@ class DataPenjualController extends Controller
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
+            'latitude' => '',
+            'longitude' => '',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'no_ponsel' => 'required',
@@ -141,6 +147,8 @@ class DataPenjualController extends Controller
         $apdetDataPenjual->nama          = $request->nama;
         $apdetDataPenjual->jenis_kelamin = $request->jenis_kelamin;
         $apdetDataPenjual->alamat        = $request->alamat;
+        $apdetDataPenjual->latitude        = $request->latitude;
+        $apdetDataPenjual->longitude        = $request->longitude;
         $apdetDataPenjual->tempat_lahir  = $request->tempat_lahir;
         $apdetDataPenjual->tanggal_lahir = $request->tanggal_lahir;
         $apdetDataPenjual->no_ponsel     = $request->no_ponsel;

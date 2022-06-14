@@ -19,6 +19,8 @@ class CreateDataPenjualTable extends Migration
             $table->string('nama');
             $table->string('jenis_kelamin');
             $table->string('alamat');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->string('tempat_lahir');
             $table->string('tanggal_lahir');
             $table->string('no_ponsel')->unique();

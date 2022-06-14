@@ -20,6 +20,8 @@ class DataOrderanResource extends JsonResource
             'nama' => $this->nama,
             'no_hp' => $this->no_hp,
             'alamat' => $this->alamat,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
             'nama_barang' => $this->nama_barang,
             'merk_barang' => $this->merk_barang,
             'harga_barang' => $this->harga_barang,

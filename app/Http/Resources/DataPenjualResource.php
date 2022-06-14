@@ -20,6 +20,8 @@ class DataPenjualResource extends JsonResource
             'nama' => $this->nama,
             'jenis_kelamin' => $this->jenis_kelamin,
             'alamat' => $this->alamat,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
             'tempat_lahir' => $this->tempat_lahir,
             'tanggal_lahir' => $this->tanggal_lahir,
             'no_ponsel' => $this->no_ponsel,

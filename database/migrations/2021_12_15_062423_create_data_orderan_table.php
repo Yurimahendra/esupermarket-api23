@@ -19,6 +19,8 @@ class CreateDataOrderanTable extends Migration
             $table->string('nama');
             $table->string('no_hp');
             $table->string('alamat');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->string('nama_barang');
             $table->string('merk_barang');
             $table->string('harga_barang');

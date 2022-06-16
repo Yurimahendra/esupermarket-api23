@@ -33,6 +33,8 @@ class DataOrderanController extends Controller
             'nama' => 'required',
             'no_hp' => 'required',
             'alamat' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
             'nama_barang' => 'required',
             'merk_barang' => 'required',
             'harga_barang' => 'required',
@@ -54,6 +56,8 @@ class DataOrderanController extends Controller
             'nama' => $request->nama,
             'no_hp' => $request->no_hp,
             'alamat' => $request->alamat,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
             'nama_barang' => $request->nama_barang,
             'merk_barang' => $request->merk_barang,
             'harga_barang' => $request->harga_barang,
@@ -97,6 +101,8 @@ class DataOrderanController extends Controller
             'nama' => 'required',
             'no_hp' => 'required',
             'alamat' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
             'nama_barang' => 'required',
             'merk_barang' => 'required',
             'harga_barang' => 'required',
@@ -133,7 +139,9 @@ class DataOrderanController extends Controller
         $apdetDataOrderan->id_pesanan           = $request->id_pesanan;
         $apdetDataOrderan->nama          = $request->nama;
         $apdetDataOrderan->no_hp         = $request->no_hp;
-        $apdetDataOrderan->alamat = $request->alamat;
+        $apdetDataOrderan->alamat       = $request->alamat;
+        $apdetDataOrderan->latitude         = $request->latitude;
+        $apdetDataOrderan->longitude        = $request->longitude;
         $apdetDataOrderan->nama_barang        = $request->nama_barang;
         $apdetDataOrderan->merk_barang        = $request->merk_barang;
         $apdetDataOrderan->harga_barang        = $request->harga_barang;

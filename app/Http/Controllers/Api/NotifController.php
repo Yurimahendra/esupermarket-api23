@@ -9,15 +9,15 @@ class NotifController extends Controller
 {
     public function NotifOrder(Request $requset) {
 
-        /*$mData = [
-            'title' => "Notifikasi",
-            'body' => "Ada Orderan Masuk"
-        ];*/
-
         $mData = [
+            'title' => "Notifikasi",
+            'body' => "Ada Orderan Masuk Nih"
+        ];
+
+        /*$mData = [
             'title' => $requset->title,
             'body' => $requset->body
-        ];
+        ];*/
 
         $fcm[] = "en6bytplTNWQWQHj3ULjkV:APA91bHR9DIW3YYkg7LwsoY2G5hJTRxfVTM-45alLB1lBz7ftYeMsZDDMY41VFWkfOV6y-Kq7vucmsdmK1JAB5IYjOLzCNAduNk7Ehnim6DUp1kBX_CkFUX7k8t835LdBRhKGkRUG4ym";
 

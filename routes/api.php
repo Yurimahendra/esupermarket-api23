@@ -30,4 +30,4 @@ Route::apiResources([
 
 //Route::get('/api/dataproduk', [Api\DataProdukController::class, 'index']);
 
-//Route::post('api/dataproduk/{dataproduk}', [Api\DataProdukController::class, 'destroy']);
+Route::post('notiforder', 'Api\NotifController@NotifOrder');

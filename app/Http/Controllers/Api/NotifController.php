@@ -52,6 +52,6 @@ class NotifController extends Controller
             'data' => $mData,
             'firebase_response' => json_decode($response)
         ];
-        return $mData;
+        return $data;
     }
 }

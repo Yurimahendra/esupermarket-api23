@@ -123,7 +123,7 @@ class DataKeranjangController extends Controller
      * @param  \App\Models\DataKeranjang  $dataKeranjang
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DataKeranjang $dataKeranjang)
+    public function destroy($dataKeranjang)
     {
         $hapusDataproduk = DataKeranjang::find($dataKeranjang);
         $hapusDataproduk->delete();

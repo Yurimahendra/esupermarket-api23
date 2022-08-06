@@ -9,9 +9,9 @@ class StsLoginPenjualController extends Controller
 {
     public function StatusLoginPenjual(Request $request){
         
-        $login = ['status' => $request->status];
+        $login = $request->status;
 
-        if($login[0] = null){
+        if($login != "true"){
             $login = "false";
         }
 

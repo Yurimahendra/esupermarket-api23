@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class StsLoginPenjualController extends Controller
 {
     public function StatusLoginPenjual(Request $request){
-        $login = "false";
+        $login = ["false"];
 
         $login = ['status' => $request->status];
 

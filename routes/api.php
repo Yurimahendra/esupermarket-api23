@@ -31,3 +31,6 @@ Route::apiResources([
 //Route::get('/api/dataproduk', [Api\DataProdukController::class, 'index']);
 
 Route::post('notiforder', 'Api\NotifController@NotifOrder');
+
+Route::post('statusloginpenjual', 'Api\StsLoginPenjualController@StatusLoginPenjual');
+Route::get('statusloginpenjualG', 'Api\StsLoginPenjualController@StatusLoginPenjual');

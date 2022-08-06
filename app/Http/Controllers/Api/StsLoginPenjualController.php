@@ -9,7 +9,7 @@ class StsLoginPenjualController extends Controller
 {
     public function StatusLoginPenjual(Request $request){
 
-        $login = $request->status;
+        $login = ['status' => $request->status];
 
         return $login;
     }
